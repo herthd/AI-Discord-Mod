@@ -7,6 +7,24 @@ import os
 from dotenv import load_dotenv
 import asyncio
 import json
+from flask import Flask
+from threading import Thread
+import os
+
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return "Sven AI Mod is alive!"
+
+def run_flask():
+    app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 10000)))
+
+# Start Flask in background thread
+Thread(target=run_flask).start()
+
+# Then your normal bot.run() code...
+
 
 load_dotenv()
 
